@@ -84,6 +84,14 @@ void set_commands(struct commands *cmds, char *msg)
         return;
       }
   }
+  else if (strncmp(option, "MEA", b2chk) == 0)
+  {
+    if (option[3] == '?')
+    {
+      Serial.println(ardy.get_photo_meas());
+      return;
+    }
+  }
   // default
   else
   {
