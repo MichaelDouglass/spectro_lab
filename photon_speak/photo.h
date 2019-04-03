@@ -9,15 +9,10 @@ class Photo
   public:
     Photo()
     {
-      // this->pin = A0;
       this->V_val = 0;
     };
     ~Photo(){};
 
-    void init_meas_pin()
-    {
-      pinMode(this->pin, INPUT);
-    }
 
     int get_meas()
     {
