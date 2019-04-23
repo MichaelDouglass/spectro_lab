@@ -3,6 +3,7 @@
 
 #include "lever.h"
 #include "photo.h"
+#include "stepper.h"
 
 class Ardy
 {
@@ -10,6 +11,7 @@ class Ardy
   	// objects
     Lever lever;
     Photo photo;
+    Stepper stepper;
 
   public:
     Ardy(){};
@@ -21,8 +23,13 @@ class Ardy
     void init_lever() { this->lever.init_attach(); }
 
     Photo get_photo() { return this->photo; }
-    void init_photo() { this->photo.init_meas_pin(); }
     int get_photo_meas() { return this->photo.get_meas(); }
+
+    Stepper get_stepper() { return this->stepper; }
+    void init_stepper() {this->stepper.init_step(); }
+    bool get_step_direction() {return this->stepper.get_dir(); }
+    void set_step_direction(bool direction) {this->stepper.set_dir(direction); }
+    void take_more_steps(int step_nums) {this->stepper.take_steps(step_nums); }
 
 };
 

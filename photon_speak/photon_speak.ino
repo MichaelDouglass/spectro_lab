@@ -19,6 +19,7 @@ void setup() {
   init_commands(&cmds);
   Serial.begin(115200);
   ardy.init_lever();
+  ardy.init_stepper();
   delay(500);
   Serial.println("Ready!");
 }

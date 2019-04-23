@@ -92,6 +92,61 @@ void set_commands(struct commands *cmds, char *msg)
       return;
     }
   }
+  else if (strncmp(option, "STP", b2chk) == 0)
+  {
+    if (option[3] == '?')
+    {
+      Serial.println("Yet to code");
+      return;
+    }
+
+    option = strtok(NULL, " ");
+    cmds->func = "STP";
+
+    if (strncmp(option, "MOV", b2chk) == 0)
+    {
+      option = strtok(NULL, " ");
+
+      int steps = atoi(option);
+      if (steps < 1)
+      {
+        Serial.print("Steps was below acceptable value of 1. Steps set to 1.");
+        steps = 1;
+      }
+      else if (steps > 1000)
+      {
+        Serial.print("Steps was above acceptable value of 1000. Steps set to 1000.");
+        steps = 1000;
+      }
+
+      ardy.take_more_steps(steps);
+      Serial.println("Moving...");
+    }
+    else if (strncmp(option, "SET", b2chk) == 0)
+    {
+      option = strtok(NULL, " ");
+
+      int direction = atoi(option);
+      if (direction == 1)
+      {
+        ardy.set_step_direction(1);
+        Serial.println("Direction CCW");
+      }
+      else if (direction == 0)
+      {
+        ardy.set_step_direction(0);
+        Serial.println("Direction CW");
+      }
+      else
+      {
+        Serial.println("Invalid Argument");
+      }
+    }
+    else if (strncmp(option, "BYE", b2chk) == 0)
+    {
+      Serial.println("Congratulations, you just reached the LIGHT at the end of the tunnel.");
+    }
+  }
   // default
   else
   {
